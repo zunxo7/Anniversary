@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Happy Anniversary </title>
+	<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@keyframes popIn {
+	0%{
+     		transform: scale(0);
+		opacity: 0;
+    	}
+    	100%{
+        	transform: scale(1);
+		opacity: 1;
+    	}
+}
+
+@keyframes fadeIn {
+	0%{
+     		opacity: 0;
+    	}
+    	100%{
+        	opacity: 1;
+    	}
+}
+
+@keyframes flutter {
+    0% {
+        transform: scale(1);
+        filter: saturate(1);
+    }
+    25% {
+        transform: scale(1.05);
+        filter: saturate(1.8);
+    }
+    50% {
+        transform: scale(1.1);
+        filter: saturate(3); /* Maximum saturation */
+    }
+    75% {
+        transform: scale(1.05);
+        filter: saturate(1.8);
+    }
+    100% {
+        transform: scale(1);
+        filter: saturate(1);
+    }
+}
+
+
+body{
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	background: #f2e1d9;
+	height: 100vh;
+	margin: 0;
+	cursor: default;
+	overflow: hidden;
+}
+
+.wrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	width: 100%;
+}
+
+#title{
+	opacity: 0;
+	margin: 0 30px;
+	animation: popIn 1s ease forwards;
+	animation-delay: 0.5s;
+	transition: scale 0.35s ease;
+}
+
+#h2{
+	transform: scaleX(-1);
+}
+
+#h1, #h2{
+	width: 100px;
+	animation: fadeIn 2s ease forwards;
+	transition: scale 0.35s ease;
+}
+
+#h1:hover, #h2:hover, #love:hover, #title:hover{
+	scale: 1.05;
+}
+
+#love{
+	transition: scale 0.35s ease;
+	cursor: pointer;
+}
+
+.card{
+	opacity: 0;
+	box-sizing: border-box;
+	background: #fff; 
+	width: 550px; 
+	height: 225px; 
+	border-radius: 25px;
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	animation: popIn 1s ease forwards;
+	animation-delay: 1s;
+}
+
+#line{
+	width: 90%;
+	height: 60px;
+	position: relative;
+	z-index: 1;
+}
+
+#L{
+	position: absolute;
+	bottom: 15px;
+	z-index: 2;
+	width: 30px;
+	margin-right: 4px;
+}
+
+.LAnim{
+	animation: flutter 1.5s infinite linear;
+}
+
+p{
+	font-size: 22px;
+	color: #621c19;
+}
+</style>
+
+</head>
+<body>
+
+<div class="wrapper"> 
+	<div style="display: flex; justify-content: space-between;width: 100vw;">
+		<img src="Heart.svg" id="h1">
+ 		<img src="Title.svg" id="title" width="300px">
+		<img src="Heart.svg" id="h2">
+	</div>
+
+	<div class="card"> 
+		<p id="time"></p>
+		<p id="love"> <strong> I LOVE YOU SO MUCH </strong> </p>
+		<div style="display: flex;flex-direction: column;align-items: center">
+			<img src="HeartL.svg" id="L">
+			<img src="Line.svg" id="line">
+		</div>
+	</div>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Difference</title>
+</head>
+<body>
+  <div id="time-diff"></div>
+
+  <script>
+	 
+	const L = document.getElementById('L');
+	const love = document.getElementById('love');
+	love.addEventListener('click', function() {
+     	L.classList.add('LAnim');});
+    
+    const targetDate = new Date('2022-12-08T13:43:00');
+
+    function updateTimeSince() {
+      const now = new Date();
+
+      // Get the difference in total milliseconds
+      let diffInMs = now - targetDate;
+
+      // Calculate the total number of seconds
+      let totalSeconds = Math.floor(diffInMs / 1000);
+      
+      // Calculate the total number of minutes
+      let totalMinutes = Math.floor(totalSeconds / 60);
+      
+      // Calculate the total number of hours
+      let totalHours = Math.floor(totalMinutes / 60);
+
+      // Calculate the total number of days
+      let totalDays = Math.floor(totalHours / 24);
+      
+      // Calculate the number of years (roughly assuming 365 days per year)
+      let years = Math.floor(totalDays / 365);
+      totalDays -= years * 365; // Remove years' days
+
+      // Calculate the number of months (roughly assuming 30 days per month)
+      let months = Math.floor(totalDays / 30);
+      totalDays -= months * 30; // Remove months' days
+
+      // The remaining days
+      let days = totalDays;
+
+      // Remaining hours, minutes, and seconds
+      let hours = totalHours % 24;
+      let minutes = totalMinutes % 60;
+      let seconds = totalSeconds % 60;
+
+      // Display the result
+      document.getElementById('time').innerHTML =
+        `${years} years, ${months} months ${days} days ${hours} hours ${minutes} minutes <br> ${seconds} seconds`;
+    }
+
+	updateTimeSince();
+
+    // Update the time every second
+    setInterval(updateTimeSince, 1000);
+  </script>
+
+</div>
+</body>
+</html>
